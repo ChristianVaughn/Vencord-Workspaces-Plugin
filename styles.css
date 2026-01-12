@@ -1,0 +1,580 @@
+/* ServerTabs Plugin Styles */
+
+/* ===== CSS Grid Layout (CRITICAL - like BetterFolders) ===== */
+.vc-st-sidebar {
+    grid-area: serverTabsSidebar;
+}
+
+/* These area names need to be hardcoded. Only serverTabsSidebar is added by the plugin. */
+.vc-serverTabs-sidebar-grid {
+    /* stylelint-disable-next-line value-keyword-case */
+    grid-template-columns: [start] min-content [guildsEnd] min-content [sidebarEnd] min-content [channelsEnd] 1fr [end];
+    grid-template-areas:
+        "titleBar titleBar titleBar titleBar"
+        "guildsList serverTabsSidebar notice notice"
+        "guildsList serverTabsSidebar channelsList page";
+}
+
+/* ===== Toggle Button (matches Discord server icon style) ===== */
+.vc-st-toggle-btn {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    margin: 0 auto 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    /* Theme-aware colors: light=#e4e4e6/#323339, adapts to dark theme */
+    background: var(--background-mod-subtle);
+    color: var(--interactive-normal);
+    cursor: pointer;
+    transition: border-radius 150ms ease-out, background-color 150ms ease-out, color 150ms ease-out;
+    /* Reset button styles */
+    border: none;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.vc-st-toggle-btn:hover {
+    background: #5865f2;
+    color: white;
+    border-radius: 16px;
+}
+
+.vc-st-toggle-btn[data-active="true"] {
+    background: #5865f2;
+    color: white;
+    border-radius: 16px;
+}
+
+/* ===== Sidebar Content ===== */
+.vc-st-sidebar-inner {
+    width: 240px;
+    min-width: 240px;
+    background: var(--background-secondary);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.vc-st-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--background-modifier-accent);
+    flex-shrink: 0;
+    height: 48px;
+    box-sizing: border-box;
+}
+
+.vc-st-sidebar-header span {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--header-primary);
+}
+
+.vc-st-sidebar-close {
+    background: transparent;
+    border: none;
+    color: var(--interactive-normal);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vc-st-sidebar-close:hover {
+    background: var(--background-modifier-hover);
+    color: var(--interactive-hover);
+}
+
+.vc-st-sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.vc-st-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 2px;
+    transition: background-color 100ms ease;
+}
+
+.vc-st-sidebar-item:hover {
+    background: var(--background-modifier-hover);
+}
+
+.vc-st-sidebar-item[data-active="true"] {
+    background: var(--background-modifier-selected);
+}
+
+.vc-st-sidebar-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--tab-color, var(--background-tertiary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: border-radius 150ms ease-out, filter 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.vc-st-sidebar-item:hover .vc-st-sidebar-icon {
+    border-radius: 8px;
+    filter: brightness(1.15);
+}
+
+.vc-st-sidebar-item[data-active="true"] .vc-st-sidebar-icon {
+    border-radius: 8px;
+    filter: brightness(1.2);
+    box-shadow: 0 0 0 2px var(--tab-color, var(--brand-500));
+}
+
+/* Settings icon - neutral gray that's visible */
+.vc-st-settings-icon {
+    background: #5865F2 !important;
+    color: white !important;
+}
+
+.vc-st-sidebar-settings:hover .vc-st-settings-icon {
+    filter: brightness(1.15);
+}
+
+.vc-st-sidebar-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--interactive-normal);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vc-st-sidebar-item:hover .vc-st-sidebar-name,
+.vc-st-sidebar-item[data-active="true"] .vc-st-sidebar-name {
+    color: var(--interactive-active);
+}
+
+.vc-st-sidebar-count {
+    font-size: 12px;
+    padding: 2px 6px;
+    background: var(--background-tertiary);
+    border-radius: 8px;
+    color: var(--text-muted);
+}
+
+/* Settings item spacing */
+.vc-st-sidebar-settings {
+    margin-top: 8px;
+    border-top: 1px solid var(--background-modifier-accent);
+    padding-top: 10px;
+}
+
+/* ===== Modal Styles ===== */
+.vc-st-modal-header {
+    padding: 16px 20px;
+    box-shadow: none;
+}
+
+.vc-st-modal-content {
+    padding: 0 20px 20px;
+}
+
+.vc-st-modal-footer {
+    padding: 16px 20px;
+    box-shadow: none;
+    justify-content: flex-end;
+}
+
+/* Sections */
+.vc-st-section {
+    margin-bottom: 20px;
+}
+
+.vc-st-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-default);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+}
+
+.vc-st-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+/* Tab Switcher Buttons */
+.vc-st-tab-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.vc-st-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--background-secondary);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: var(--text-default);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.vc-st-tab-btn:hover {
+    background: var(--background-modifier-hover);
+    border-color: var(--background-modifier-accent);
+}
+
+.vc-st-tab-btn[data-active="true"] {
+    background: var(--brand-500);
+    border-color: var(--brand-500);
+    color: white;
+}
+
+.vc-st-tab-count {
+    font-size: 11px;
+    padding: 2px 6px;
+    background: var(--background-tertiary);
+    border-radius: 10px;
+    color: var(--text-muted);
+}
+
+.vc-st-tab-btn[data-active="true"] .vc-st-tab-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Tab List for Management */
+.vc-st-tab-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vc-st-tab-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--background-secondary);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: all 150ms ease;
+}
+
+.vc-st-tab-item[data-editing="true"] {
+    border-color: var(--brand-500);
+    background: var(--background-tertiary);
+}
+
+.vc-st-tab-name {
+    font-weight: 600;
+    color: var(--text-default);
+}
+
+.vc-st-tab-info {
+    flex: 1;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Empty State */
+.vc-st-empty {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    background: var(--background-secondary);
+    border-radius: 8px;
+}
+
+/* Edit Section */
+.vc-st-edit-section {
+    padding: 16px;
+    background: var(--background-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--background-modifier-accent);
+}
+
+.vc-st-edit-name {
+    margin-bottom: 16px;
+}
+
+/* Server Grid */
+.vc-st-server-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+    max-height: 300px;
+    padding: 4px;
+}
+
+.vc-st-server-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--background-secondary);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.vc-st-server-item:hover {
+    background: var(--background-modifier-hover);
+}
+
+.vc-st-server-item[data-selected="true"] {
+    border-color: var(--brand-500);
+    background: var(--background-secondary-alt, var(--background-secondary));
+}
+
+.vc-st-server-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: var(--background-tertiary);
+    color: var(--text-default);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.vc-st-server-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vc-st-server-name {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text-default);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Checkbox */
+.vc-st-check {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--interactive-normal);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 150ms ease;
+    color: transparent;
+}
+
+.vc-st-check[data-checked="true"] {
+    background: var(--brand-500);
+    border-color: var(--brand-500);
+    color: white;
+}
+
+/* ===== Two-Panel Modal Layout ===== */
+.vc-st-modal-layout {
+    display: flex;
+    gap: 16px;
+    height: 400px;
+}
+
+/* Left Panel - Tab List */
+.vc-st-modal-tabs {
+    width: 140px;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.vc-st-modal-tabs-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.vc-st-modal-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 100ms ease;
+}
+
+.vc-st-modal-tab:hover {
+    background: var(--background-modifier-hover);
+}
+
+.vc-st-modal-tab[data-selected="true"] {
+    background: var(--background-modifier-selected);
+}
+
+.vc-st-modal-tab-name {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-default);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vc-st-modal-tab[data-selected="true"] .vc-st-modal-tab-name {
+    color: var(--text-default);
+}
+
+.vc-st-modal-tab-count {
+    font-size: 11px;
+    padding: 1px 5px;
+    background: var(--background-tertiary);
+    border-radius: 6px;
+    color: var(--text-muted);
+}
+
+.vc-st-modal-new-btn {
+    margin-top: 8px;
+    padding: 8px;
+    border: 2px dashed var(--background-modifier-accent);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.vc-st-modal-new-btn:hover:not(:disabled) {
+    border-color: var(--brand-500);
+    color: var(--brand-500);
+    background: var(--background-modifier-hover);
+}
+
+.vc-st-modal-new-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Right Panel - Edit Area */
+.vc-st-modal-edit {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    padding: 16px;
+    overflow: hidden;
+}
+
+.vc-st-modal-edit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+}
+
+.vc-st-modal-edit-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-default);
+}
+
+.vc-st-modal-edit-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.vc-st-modal-edit-name {
+    margin-bottom: 12px;
+    flex-shrink: 0;
+}
+
+.vc-st-modal-servers-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-default);
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+.vc-st-modal-servers {
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 6px;
+    align-content: start;
+    padding: 2px;
+}
+
+.vc-st-modal-edit-footer {
+    margin-top: 12px;
+    flex-shrink: 0;
+}
+
+/* Empty state for right panel */
+.vc-st-modal-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px;
+}
+
+.vc-st-modal-empty-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.vc-st-modal-empty-text {
+    font-size: 14px;
+}
