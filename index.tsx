@@ -94,13 +94,13 @@ export default definePlugin({
             group: true,
             replacement: [
                 {
-                    // Render the ServerTabs sidebar next to the guilds bar
-                    match: /(?<=[[,])((?:!?\i&&)+)\(.{0,50}({className:\i\.guilds,themeOverride:\i})\)/g,
+                    // Render the Workspaces sidebar next to the guilds bar
+                    match: /(?<=[[,])((?:!?\i&&)+)\(.{0,50}({className:\i\.\i,themeOverride:\i})\)/g,
                     replace: (m, conditions, props) => `${m},${conditions}$self.TabSidebar(${props})`
                 },
                 {
                     // Add grid styles to fix alignment
-                    match: /(?<=className:)\i\.base(?=,)/,
+                    match: /(?<=className:)\i\.\i(?=,"data-fullscreen")/,
                     replace: `"${GRID_STYLE_NAME} "+$&`
                 }
             ]
